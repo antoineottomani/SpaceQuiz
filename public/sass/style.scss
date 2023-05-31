@@ -1,0 +1,3189 @@
+/*  FEUILLE DE STYLE POUR SPACEQUIZ
+    Auteur : Antoine Ottomani
+*/
+
+/* ==============================
+    VARIABLES GLOBALES DU SITE
+============================== */
+$primaryColor: #fb7d00;
+$secondaryColor: #2b75ff;
+$darkColor: #1d1d1d;
+$lightColor: #ffffff;
+
+/* Déclaration des mixins */
+@mixin googleFonts($font) {
+  @import url("https://fonts.googleapis.com/css2?family=#{$font}");
+}
+
+// Déclaration des fonts
+@include googleFonts(Karla);
+@include googleFonts(Lato);
+@include googleFonts(Poppins);
+
+@mixin siteTitle() {
+  font-size: 1.5em;
+  font-family: "Lato", sans-serif;
+  color: $lightColor;
+}
+
+@mixin navLink() {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: $lightColor;
+}
+
+@mixin headingOne() {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: $lightColor;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+@mixin headingTwo() {
+  font-size: 1.5em;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+}
+
+@mixin textContent() {
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+  font-size: 1em;
+}
+
+@mixin returnButton() {
+  background-color: $primaryColor;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* RESET DE CERTAINS ÉLEMENTS */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* =============================
+    CONTENEUR PRINCIPAL DU SITE
+  ============================== */
+main {
+  display: flex;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+/* ********************************************************************* */
+/* ********** ========   MOBILE FIRST   ======= *********************** */
+/* ********************************************************************* */
+
+/*HEADER */
+header {
+  background-color: $darkColor;
+  width: 100%;
+  top: 0;
+  position: sticky;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .site-brand {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+
+    .logo-brand {
+      display: inline-block;
+      margin-bottom: 5px;
+      width: 20%;
+    }
+    .title-brand {
+      @include siteTitle();
+      margin-left: 25%;
+    }
+  }
+
+  /* MENU BURGER POUR MOBILE */
+  .burger {
+    cursor: pointer;
+    float: right;
+    padding: 40px 30px;
+  }
+
+  .burger-line {
+    background: $lightColor;
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 20px;
+  }
+
+  .burger-line::before,
+  .burger-line::after {
+    background: $lightColor;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all 0.1s ease-out;
+    width: 100%;
+  }
+
+  .burger-line::before {
+    top: 5px;
+  }
+
+  .burger-line::after {
+    top: -5px;
+  }
+
+  .side-menu {
+    display: none;
+  }
+
+  .side-menu:checked ~ nav {
+    max-height: 100%;
+    top: 80px;
+  }
+
+  .side-menu:checked ~ .burger .burger-line {
+    background: transparent;
+  }
+
+  .side-menu:checked ~ .burger .burger-line::before {
+    transform: rotate(-45deg);
+    top: 0;
+    z-index: 1;
+  }
+
+  .side-menu:checked ~ .burger .burger-line::after {
+    transform: rotate(45deg);
+    top: 0;
+    z-index: 1;
+  }
+
+  /* BARRE DE NAVIGATION */
+  nav {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: $darkColor;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    top: 80px;
+
+    ul a {
+      @include navLink();
+      display: block;
+      padding: 20px;
+      margin: 30px 40px;
+      cursor: pointer;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE ACCUEIL */
+
+.home-container {
+  margin: 0 auto;
+  width: 100%;
+
+  .banner {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.3) 100%), url(../img/main/banner.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+
+    h1 {
+      @include headingOne();
+      margin-top: 0;
+      padding-top: 80px;
+    }
+
+    i {
+      display: none;
+    }
+  }
+
+  .all-quiz {
+    margin: 60px auto;
+    text-align: center;
+    width: 100%;
+
+    h2 {
+      color: $darkColor;
+      font-family: "Lato", sans-serif;
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 1.3em;
+    }
+
+    .cta-see-more {
+      width: 100%;
+      background-color: $primaryColor;
+      padding: 10px;
+
+      a {
+        color: $lightColor;
+        font-size: 1.3em;
+        font-family: "Poppins", sans-serif;
+        padding: 10px;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 50px auto;
+
+      li {
+        margin: auto;
+
+        a {
+          img {
+            width: 150px;
+          }
+
+          h3 {
+            color: $darkColor;
+            font-family: "Lato", sans-serif;
+            text-align: center;
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE PREVIEW QUIZ */
+
+.quiz-preview {
+  width: 100%;
+  margin: 30px auto;
+
+  .start-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .cover {
+      width: 350px;
+      padding: 20px;
+    }
+
+    .overlay h1 {
+      margin-top: 10px;
+      font-size: 2em;
+      font-family: "Lato";
+      text-align: center;
+    }
+
+    .description-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin-top: 0;
+        font-size: 1.2em;
+        font-family: "Karla";
+      }
+
+      .play {
+        padding: 10px 25px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Exo";
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE CONTENU DE QUIZ */
+.quiz-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin: 10px auto;
+
+  h1 {
+    @include headingOne();
+    font-size: 1.1em;
+    padding: 10px;
+    color: black;
+  }
+
+  .quiz-card {
+    margin-top: 0px;
+
+    form {
+      .choices {
+        padding: 0;
+
+        li {
+          background-color: #e8e8e8;
+          border-radius: 5px;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          height: 20px;
+          font-family: "Karla";
+          font-size: 1em;
+          margin: 15px;
+
+          &:hover {
+            background-color: $primaryColor;
+            color: $lightColor;
+          }
+
+          input[type="radio"] {
+            width: 20px;
+          }
+        }
+      }
+
+      .next-question {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+
+        .submit-answer {
+          margin: 1px;
+          width: 120px;
+          padding: 10px;
+          color: $lightColor;
+          background: $primaryColor;
+          cursor: pointer;
+          font-size: 18px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-family: "Poppins", sans-serif;
+          border: none;
+        }
+
+        i {
+          margin-top: 20px;
+          font-size: 2.5em;
+
+          &:hover {
+            color: $primaryColor;
+          }
+        }
+      }
+    }
+  }
+
+  .quiz-img {
+    width: 330px;
+    margin: 30px auto;
+
+    .thumbnail {
+      width: 100%;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE DES RÉSULTATS DU QUIZ */
+.quiz-preview {
+  .start-area {
+    .description-area > p {
+      margin: 20px;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ******************   PARTIE BACK OFFICE     ************************ */
+/* ********************************************************************* */
+
+/* PAGE PANNEL ADMIN */
+
+.admin-container {
+  width: 100%;
+  margin: 40px auto;
+
+  h1 {
+    text-align: center;
+    font-family: "Lato", sans-serif;
+  }
+
+  .actions-admin {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto;
+    text-align: center;
+    font-size: 0.9em;
+
+    .category-area,
+    .question-answers-area,
+    .user-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px auto;
+
+      .btn-action {
+        text-align: center;
+        font-size: 1.2em;
+        font-family: "Poppins";
+        color: black;
+        i {
+          width: 60px;
+          height: 60px;
+          border-radius: 40px;
+          background-color: $primaryColor;
+          color: $lightColor;
+          text-align: center;
+          padding-top: 14px;
+          margin-right: 30px;
+          font-size: 1.9em;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ***************     PARTIE CATÉGORIE     ************************** */
+/* ********************************************************************* */
+
+/*PAGE ADMINISTRATION CATÉGORIE*/
+
+.add-global-content {
+  margin: 40px auto;
+
+  .back-btn {
+    @include returnButton();
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    text-align: center;
+    font-family: "Lato";
+    margin-top: 40px;
+  }
+  .actions-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .edit-category,
+    .add-category {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin: 40px auto;
+
+      a {
+        @include navLink();
+        color: black;
+        padding: 10px;
+        font-size: 1.2em;
+        letter-spacing: 1px;
+
+        i {
+          width: 60px;
+          height: 60px;
+          border-radius: 40px;
+          background-color: $primaryColor;
+          color: $lightColor;
+          text-align: center;
+          padding-top: 14px;
+          margin-right: 40px;
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE D'AJOUT DE LA CATÉGORIE */
+
+.add-category {
+  width: 100%;
+  margin: 0px auto;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    font-size: 1.5em;
+    font-family: "Lato", sans-serif;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  form {
+    width: 100%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      width: 70%;
+      margin: 10px;
+      font-size: 1.1em;
+      text-align: center;
+      border: 1px solid $primaryColor;
+    }
+
+    input[type="file"] {
+      border: none;
+    }
+
+    .choice-one,
+    .choice-two {
+      font-size: 1em;
+      font-family: "Lato";
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      width: 120px;
+      padding: 10px;
+      color: $lightColor;
+      background: $primaryColor;
+      cursor: pointer;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: "Poppins", sans-serif;
+      border: none;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE D'ÉDITION ET SUPPRESSION CATÉGORIE */
+
+.editing-category-list {
+  width: 100%;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  .modal-container {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: visibility 0.4s;
+  }
+
+  .modal-container.active {
+    visibility: visible;
+    transition: visibility 0s;
+  }
+
+  .overlay {
+    opacity: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #333333d3;
+    transition: opacity 0.4s 0.2s ease-out;
+  }
+
+  .modal-container.active .overlay {
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .modal {
+    width: 95%;
+    max-width: 500px;
+    min-width: 300px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 5px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 50px));
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+
+    .btns {
+      display: flex;
+      margin: 10px;
+      justify-content: space-around;
+      padding: 5px;
+    }
+  }
+
+  .modal-container.active .modal {
+    opacity: 1;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .close-modal {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #ff365e;
+    color: #fff;
+  }
+
+  .warning-delete {
+    margin-bottom: 5px;
+    font-family: "Poppins";
+    font-weight: 500;
+    margin-top: 30px;
+  }
+
+  .confirm-delete,
+  .no-delete {
+    width: 50px;
+    padding: 3px;
+    color: $lightColor;
+    background: $primaryColor;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+
+    blockquote {
+      background-color: $primaryColor;
+      padding: 10px;
+      color: $lightColor;
+      font-size: 1.2em;
+      font-family: "Karla";
+    }
+    h1 {
+      @include headingOne();
+      color: black;
+      font-size: 1.5em;
+      margin-top: 30px;
+    }
+
+    .category-listing {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+
+      ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-top: 0;
+
+          h2 {
+            @include headingTwo();
+          }
+          .thumbnail-edit {
+            width: 250px;
+          }
+
+          .actions-edit {
+            margin: 20px auto;
+            display: flex;
+            text-align: center;
+            justify-content: space-around;
+            width: 100%;
+
+            a {
+              margin: 1px;
+              width: 48%;
+              color: $lightColor;
+              background: $primaryColor;
+              cursor: pointer;
+              font-size: 15px;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              font-family: "Poppins", sans-serif;
+              border: none;
+            }
+
+            .btn-delete {
+              margin: 1px;
+              width: 48%;
+              color: $lightColor;
+              background: $primaryColor;
+              cursor: pointer;
+              font-size: 13px;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              font-family: "Poppins", sans-serif;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE DE FORM POUR L'ÉDITION DE CATÉGORIE  */
+.edit-category {
+  margin: 0 auto;
+  width: 100%;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.5em;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      text-align: center;
+      font-size: 1em;
+      font-family: "Poppins";
+      margin-top: 20px;
+    }
+
+    input {
+      width: 60%;
+      margin: 10px auto;
+      border: 1px solid $primaryColor;
+      font-size: 1em;
+      font-family: "Poppins";
+      text-align: center;
+    }
+
+    input[type="file"] {
+      border: none;
+    }
+
+    img {
+      width: 250px;
+      margin: 10px auto;
+    }
+
+    .user-choices {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-top: 10px;
+      font-family: "Poppins";
+      font-size: 0.9em;
+    }
+
+    .edit-form-btn {
+      margin: 10px auto;
+      .submit-btn {
+        margin: 30px auto;
+        padding: 10px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 17px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ************   PARTIE QUESTION & RÉPONSES     *********************** */
+/* ********************************************************************* */
+
+/* PAGE DE GESTION DES QUESTIONS ET RÉPONSES */
+.manage-question-answer {
+  width: 100%;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.3em;
+    margin-top: 40px;
+  }
+
+  .actions-add {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .add-question-answer,
+    .edit-question-answer {
+      margin: 50px 30px;
+      i {
+        width: 60px;
+        height: 60px;
+        border-radius: 40px;
+        background-color: $primaryColor;
+        color: $lightColor;
+        text-align: center;
+        padding-top: 14px;
+        margin-right: 40px;
+        font-size: 1.5em;
+      }
+
+      a {
+        @include navLink();
+        color: black;
+        padding: 10px;
+        font-size: 1.3em;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE D'AJOUT DE QUESTIONS ET RÉPONSES */
+.add-question-answers {
+  width: 100%;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    @include headingOne();
+    color: black;
+    margin-top: 30px;
+    font-size: 1.3em;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .question-area,
+    .answers-area {
+      width: 100%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        @include headingTwo();
+        font-size: 1.3em;
+      }
+
+      input {
+        border: 1px solid $primaryColor;
+        margin: 10px;
+        width: 80%;
+        text-align: center;
+        font-size: 1.1em;
+      }
+
+      input[type="file"] {
+        border: none;
+      }
+
+      select {
+        border: 1px solid $primaryColor;
+        margin-bottom: 40px;
+        width: 80%;
+        text-align: center;
+        font-size: 1.1em;
+      }
+
+      .answers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .input-answer {
+          width: 80%;
+          margin-top: 20px;
+        }
+
+        .verify-answers {
+          display: flex;
+          align-items: center;
+          font-size: 1.1em;
+          font-family: "Lato";
+        }
+      }
+    }
+
+    button {
+      margin-top: 10px;
+      margin-bottom: 40px;
+      padding: 10px;
+      color: $lightColor;
+      background: $primaryColor;
+      cursor: pointer;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: "Poppins", sans-serif;
+      border: none;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* LISTING DES CATÉGORIES POUR MODIFIER LEURS QUESTIONS ET RÉPONSES */
+.editing-category-list {
+  .warning-delete {
+    font-size: 0.8em;
+    text-align: center;
+  }
+  .content > .category-listing > ul > li .actions-edit {
+    width: 100%;
+    .see-questions {
+      font-size: 1.1em;
+      letter-spacing: 2px;
+      width: 100%;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE D'ÉDITION ET DE SUPPRESSION DES QUESTIONS */
+
+.editing-question-list {
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    a {
+      color: $lightColor;
+    }
+  }
+  .modal-container {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: visibility 0.4s;
+  }
+
+  .modal-container.active {
+    visibility: visible;
+    transition: visibility 0s;
+  }
+
+  .overlay {
+    opacity: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: #333333d3;
+    transition: opacity 0.4s 0.2s ease-out;
+  }
+
+  .modal-container.active .overlay {
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .modal {
+    width: 95%;
+    max-width: 500px;
+    min-width: 300px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 5px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 50px));
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+
+    .btns {
+      display: flex;
+      margin: 10px;
+      justify-content: space-around;
+      padding: 5px;
+    }
+  }
+
+  .modal-container.active .modal {
+    opacity: 1;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  .close-modal {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #ff365e;
+    color: #fff;
+  }
+
+  .warning-delete {
+    margin-bottom: 5px;
+    font-family: "Poppins";
+    font-weight: 500;
+    margin-top: 30px;
+    font-size: 0.8em;
+    text-align: center;
+  }
+
+  .confirm-delete,
+  .no-delete {
+    width: 50px;
+    padding: 3px;
+    color: $lightColor;
+    background: $primaryColor;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    blockquote {
+      background-color: $primaryColor;
+      padding: 10px;
+      color: $lightColor;
+      font-size: 1.2em;
+      font-family: "Karla";
+    }
+
+    h1 {
+      @include headingOne();
+      color: black;
+      text-align: center;
+      font-size: 1.3em;
+      margin-top: 30px;
+    }
+
+    .question-listing {
+      width: 80%;
+      ul {
+        padding: 0;
+
+        li {
+          text-align: center;
+          margin-top: 30px;
+
+          h2 {
+            font-size: 1.1em;
+            padding: 10px;
+            font-family: "Karla";
+          }
+
+          .actions-edit {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 90%;
+            margin: 10px auto;
+            text-align: center;
+
+            a {
+              margin-top: 20px;
+              margin-bottom: 30px;
+              padding: 10px;
+              color: $lightColor;
+              background: $primaryColor;
+              cursor: pointer;
+              font-size: 16px;
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              font-family: "Poppins", sans-serif;
+              border: none;
+              width: 50%;
+            }
+
+            button {
+              width: 50%;
+              margin-top: 20px;
+              margin-bottom: 30px;
+              padding: 10px;
+              color: $lightColor;
+              background: $primaryColor;
+              cursor: pointer;
+              font-size: 16px;
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              font-family: "Poppins", sans-serif;
+              border: none;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE DE FORMULAIRE DE MODIFICATION DE QUESTIONS ET RÉPONSES */
+
+.edit-question-answers {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    padding: 20px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+  .edit-block {
+    form {
+      margin: 30px auto;
+      width: 80%;
+
+      .question-area {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        label {
+          text-align: center;
+          font-size: 1.1em;
+          font-family: "Poppins";
+          margin-top: 20px;
+        }
+
+        input {
+          border: 1px solid $primaryColor;
+          margin: 10px;
+          text-align: center;
+          font-size: 1em;
+        }
+
+        input[type="file"] {
+          border: none;
+        }
+      }
+
+      .answers-area {
+        margin: 0 auto;
+
+        h2 {
+          text-align: center;
+          font-size: 1.5em;
+          font-family: "Karla";
+        }
+
+        .edit-answers {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          input {
+            border: 1px solid $primaryColor;
+            margin: 10px;
+            text-align: center;
+            font-size: 1em;
+          }
+
+          .is-correct {
+            text-align: center;
+
+            label {
+              text-align: center;
+              font-size: 1.1em;
+              font-family: "Poppins";
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+      button {
+        width: 50%;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        padding: 10px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+/* ********************************************************************* */
+.users-section {
+  width: 100%;
+
+  .back-btn {
+    @include returnButton();
+    margin: 30px 30px;
+    padding: 20px;
+    a {
+      color: $lightColor;
+    }
+  }
+
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.3em;
+    margin-top: 50px;
+  }
+
+  blockquote {
+    background-color: $primaryColor;
+    padding: 10px;
+    color: $lightColor;
+    font-size: 1.2em;
+    font-family: "Karla";
+  }
+
+  .users-list {
+    width: 90%;
+    margin: 0 auto;
+
+    form {
+      table {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 20px auto;
+        font-family: "Poppins";
+        font-size: 0.8em;
+
+        thead {
+          border-bottom: 1px solid $primaryColor;
+          padding-bottom: 10px;
+          width: 100%;
+          margin: 20px auto;
+          display: inline;
+
+          tr {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
+
+          th {
+            margin-left: 40px;
+            margin-right: 40px;
+          }
+        }
+
+        tbody > tr > td {
+          border-bottom: 1px solid $darkColor;
+
+          label {
+            display: inline;
+          }
+        }
+      }
+
+      button {
+        width: 50%;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        padding: 5px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+        margin-left: 25%;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ************** INSCRIPTION / CONNEXION / MON COMPTE  **************** */
+/* ********************************************************************* */
+
+/* PAGE D'INSCRIPTION */
+.inscription-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.8em;
+    margin-top: 30px;
+  }
+
+  h2 {
+    @include headingOne();
+    color: black;
+    font-size: 1.1em;
+    margin-top: 20px;
+  }
+
+  .cta-connexion {
+    padding: 15px;
+    color: $lightColor;
+    background: $primaryColor;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    display: block;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 50px;
+    @include textContent();
+
+    label {
+      font-size: 1em;
+    }
+
+    input {
+      width: 40%;
+      border: 1px solid $primaryColor;
+    }
+
+    button {
+      margin: 50px auto;
+      padding: 15px;
+      color: $lightColor;
+      background: $primaryColor;
+      cursor: pointer;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: "Poppins", sans-serif;
+      border: none;
+    }
+
+    .login-area,
+    .password,
+    .repeat-password {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 15px;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE CONNEXION */
+.connexion-area {
+  width: 100%;
+
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.5em;
+    margin-top: 50px;
+  }
+
+  .alert-danger {
+    background-color: $primaryColor;
+    width: 100%;
+    text-align: center;
+    color: $lightColor;
+    font-size: 1.1em;
+    padding: 5px;
+    font-family: "Karla", sans-serif;
+  }
+
+  form {
+    .connexion-content {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        margin: 20px;
+        border: 1px solid $primaryColor;
+      }
+
+      .login-area,
+      .password {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 70%;
+        @include textContent();
+      }
+    }
+
+    .connexion-btn {
+      margin: 50px auto;
+      padding: 15px;
+      color: $lightColor;
+      background: $primaryColor;
+      cursor: pointer;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: "Poppins", sans-serif;
+      border: none;
+      display: flex;
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+
+/* PAGE PROFILE USER */
+
+.user-profile {
+  width: 100%;
+  margin-top: 20px;
+  h1 {
+    @include headingOne();
+    color: black;
+    font-size: 1.3em;
+  }
+
+  .alert-danger {
+    background-color: $primaryColor;
+    width: 100%;
+    text-align: center;
+    color: $lightColor;
+    font-size: 1.1em;
+    padding: 5px;
+    font-family: "Karla", sans-serif;
+  }
+
+  .content-area {
+    width: 100%;
+    margin: 20px auto;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      h2 {
+        @include headingTwo();
+        font-size: 1.3em;
+        margin-top: 50px;
+      }
+
+      .login-area,
+      .password,
+      .repeat-password {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        flex-direction: column;
+
+        input {
+          border: 1px solid $primaryColor;
+        }
+
+        label {
+          font-size: 1em;
+          font-family: "Poppins";
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+
+      .btn-edit-profile {
+        margin: 30px auto;
+        padding: 10px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 18px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+        display: flex;
+        margin-top: 20px;
+      }
+    }
+
+    .statistics {
+      h2 {
+        @include headingTwo();
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* *******  ===== TABLET MEDIA QUERIES : 768 - 992 PX ========   ****** */
+/* ********************************************************************* */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* HEADER */
+  header {
+    .site-brand .title-brand {
+      margin-left: 25%;
+      font-size: 2em;
+    }
+
+    .side-menu:checked ~ nav {
+      max-height: 100%;
+      top: 140px;
+    }
+
+    nav {
+      ul a {
+        font-size: 1.4em;
+        margin-top: 70px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE D'ACCUEIL */
+  .home-container {
+    .banner {
+      height: 550px;
+
+      h1 {
+        font-size: 1.6em;
+        padding-top: 150px;
+      }
+    }
+
+    .all-quiz {
+      width: 100%;
+      h2 {
+        font-size: 1.9em;
+      }
+
+      .cta-see-more {
+        padding: 15px;
+        a {
+          font-size: 1.7em;
+        }
+      }
+
+      ul {
+        display: flex;
+        justify-content: center;
+        li {
+          margin: 30px;
+          a {
+            img {
+              width: 200px;
+            }
+            h3 {
+              font-size: 1.6em;
+              padding: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE PREVIEW QUIZ */
+  .quiz-preview {
+    width: 100%;
+    margin: 50px auto;
+
+    .start-area {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      margin-top: 40px;
+      border-radius: 10px;
+
+      .cover {
+        width: 100%;
+      }
+
+      .overlay h1 {
+        font-size: 2em;
+      }
+
+      .description-area {
+        p {
+          font-size: 1.5em;
+        }
+
+        .play {
+          margin-bottom: 30px;
+          font-size: 1.8em;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE QUIZ CONTENT */
+  .quiz-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 100px;
+    }
+
+    .quiz-form {
+      display: flex;
+
+      form {
+        margin: auto;
+        ul {
+          margin: auto;
+          li {
+            width: 500px;
+            padding: 0;
+            margin: auto;
+          }
+        }
+
+        .next-question {
+          .submit-answer {
+            font-size: 1.5em;
+            width: auto;
+          }
+
+          i {
+            font-size: 40px;
+          }
+        }
+      }
+    }
+
+    .quiz-img {
+      margin-top: 80px;
+      width: 60%;
+    }
+  }
+
+  /* ********************************************************************* */
+  /* *********************  ADMIN PANEL  ********************************* */
+  /* ********************************************************************* */
+
+  /* PAGE ADMIN PANEL */
+
+  .admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2em;
+    }
+
+    .actions-admin {
+      display: flex;
+
+      .category-area,
+      .question-answers-area,
+      .user-area {
+        font-size: 1.3em;
+        display: flex;
+
+        .btn-action {
+          font-size: 1.2em;
+          i {
+            width: 90px;
+            height: 90px;
+            border-radius: 60px;
+            padding-top: 25px;
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE ADMINISTRATION DE LA CATÉGORIE */
+  .add-global-content {
+    .back-btn {
+      @include returnButton();
+      margin: 30px 30px;
+      a {
+        color: $lightColor;
+      }
+    }
+
+    width: 100%;
+
+    h1 {
+      font-size: 2em;
+    }
+    .actions-add {
+      .add-category,
+      .edit-category {
+        .btn-add {
+          margin: 50px;
+          width: 120px;
+          height: 120px;
+          border-radius: 50px;
+
+          display: block;
+
+          i {
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE AJOUT CATÉGORIE */
+  .add-category {
+    h1 {
+      font-size: 1.8em;
+    }
+
+    form {
+      margin-top: 60px;
+      input {
+        font-size: 1.4em;
+      }
+
+      .choice-one,
+      .choice-two {
+        font-family: "Lato", sans-serif;
+        margin-top: 30px;
+        font-size: 1.2em;
+      }
+
+      .submit-btn {
+        font-size: 1.4em;
+        width: auto;
+        letter-spacing: 2px;
+        margin-top: 50px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE GESTION DES CATÉGORIES POUR LES ÉDITER OU SUPPRIMER */
+  .editing-category-list {
+    .content {
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .category-listing {
+        ul {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          margin: 20px auto;
+          justify-content: center;
+          align-items: center;
+
+          li {
+            width: 40%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+
+            .thumbnail-edit {
+              width: 300px;
+            }
+
+            .actions-edit {
+              width: 90%;
+
+              a {
+                font-size: 1.2em;
+              }
+
+              .btn-delete {
+                font-size: 1.2em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE D'ÉDITION DE CATÉGORIE */
+  .edit-category {
+    h1 {
+      font-size: 1.8em;
+      margin-top: 40px;
+    }
+
+    form {
+      label {
+        font-size: 1.3em;
+      }
+
+      input {
+        width: 100%;
+        font-size: 1.1em;
+      }
+
+      .user-choices {
+        font-size: 1.2em;
+      }
+
+      .edit-form-btn {
+        .submit-btn {
+          font-size: 1.3em;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PANNEL DE GESTION DE QUESTIONS ET RÉPONSES */
+
+  .manage-question-answer {
+    h1 {
+      font-size: 1.6em;
+      margin-top: 60px;
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE AJOUT DE QUESTIONS ET RÉPONSES */
+  .add-question-answers {
+    h1 {
+      font-size: 1.6em;
+      margin-top: 60px;
+    }
+
+    .question-block {
+      form {
+        h2 {
+          font-size: 1.4em;
+        }
+
+        input,
+        select {
+          width: 60%;
+          font-size: 1.3em;
+        }
+
+        .answers-area {
+          margin-top: 0;
+          .answers {
+            input {
+              width: 60%;
+            }
+
+            label {
+              font-size: 1.2em;
+            }
+          }
+        }
+
+        button {
+          font-size: 1.3em;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE DE LISTE DES QUESTIONS POUR EDITER ET SUPPRIMER LES QUESTIONS RÉPONSES */
+
+  .editing-question-list {
+    width: 100%;
+    margin: 0 auto;
+
+    .content {
+      h1 {
+        font-size: 1.8em;
+        margin-top: 60px;
+      }
+
+      .question-listing {
+        width: 80%;
+        ul {
+          li {
+            h2 {
+              font-size: 1.3em;
+              padding: 5px;
+            }
+            img {
+              width: 350px;
+            }
+            .actions-edit {
+              width: 40%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              a,
+              button {
+                font-size: 18px;
+                letter-spacing: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE DE FORMULAIRE DE MODIFICATION DE QUESTION ET RÉPONSES */
+  .edit-question-answers {
+    width: 70%;
+
+    h1 {
+      font-size: 1.8em;
+      margin-top: 60px;
+    }
+
+    .edit-block {
+      form {
+        .question-area {
+          label {
+            font-size: 1.5em;
+          }
+          input {
+            font-size: 1.3em;
+            width: 100%;
+          }
+        }
+        .answers-area {
+          h2 {
+            font-size: 1.8em;
+            margin-top: 50px;
+          }
+
+          .edit-answers {
+            input {
+              font-size: 1.3em;
+              width: 100%;
+            }
+          }
+        }
+        button {
+          font-size: 1.3em;
+          margin-top: 30px;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+  /* ********************************************************************* */
+  .users-section {
+    h1 {
+      font-size: 2em;
+      margin-top: 100px;
+    }
+
+    .users-list {
+      width: 80%;
+      margin: 60px auto;
+
+      font-size: 1.2em;
+      letter-spacing: 2px;
+      padding: 10px;
+      margin-top: 70px;
+    }
+  }
+
+  /* ********************************************************************* */
+  /* *********  PARTIE CONNEXION / INSCRIPTION / COMPTE     ************** */
+  /* ********************************************************************* */
+
+  /* PAGE INSCRIPTION */
+  .inscription-area {
+    h1 {
+      font-size: 2em;
+    }
+
+    h2 {
+      font-size: 1.6em;
+    }
+
+    .cta-connexion {
+      font-size: 1.1em;
+      padding: 15px;
+    }
+
+    form {
+      width: 80%;
+      margin-top: 70px;
+      label {
+        font-size: 1.2em;
+      }
+
+      input {
+        width: 40%;
+      }
+      button {
+        font-size: 1.3em;
+        margin-top: 100px;
+        padding: 15px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE CONNEXION */
+  .connexion-area {
+    h1 {
+      font-size: 2em;
+    }
+
+    form {
+      width: 80%;
+      margin: 80px auto;
+
+      .connexion-content {
+        label {
+          font-size: 1.3em;
+        }
+
+        input {
+          width: 50%;
+        }
+      }
+
+      .connexion-btn {
+        font-size: 1.2em;
+        margin-top: 80px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE PROFIL UTILISATEUR */
+  .user-profile {
+    h1 {
+      font-size: 1.5em;
+      margin-top: 50px;
+    }
+
+    .content-area {
+      form {
+        h2 {
+          font-size: 1.4em;
+          margin-bottom: 30px;
+        }
+
+        .login-area,
+        .password,
+        .repeat-password {
+          width: 30%;
+          label {
+            font-size: 1.2em;
+          }
+
+          input {
+            width: 100%;
+          }
+        }
+
+        .btn-edit-profile {
+          font-size: 1.3em;
+          letter-spacing: 2px;
+        }
+      }
+    }
+  }
+}
+
+/* ********************************************************************* */
+/* ********* ======== DESKTOP MEDIA QUERIES  > 992px ========  ********* */
+/* ********************************************************************* */
+
+@media only screen and (min-width: 992px) {
+  /* PARTIE HEADER */
+
+  header {
+    z-index: 100;
+    .site-brand {
+      .logo-brand {
+        width: 120px;
+      }
+
+      .title-brand {
+        margin-left: 30px;
+      }
+    }
+
+    .burger {
+      display: none;
+    }
+
+    nav {
+      max-height: none;
+      top: 0;
+      position: relative;
+      float: right;
+
+      .menu {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 30px;
+
+        a {
+          margin: 5px;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE D'ACCUEIL */
+
+  .home-container {
+    .banner {
+      height: 100%;
+
+      h1 {
+        font-size: 1.5em;
+        padding-top: 300px;
+      }
+
+      i {
+        font-size: 45px;
+        display: flex;
+        margin-top: 70px;
+        color: $lightColor;
+
+        transform: scale(1);
+        animation: pulse 2s infinite;
+        justify-content: center;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(0.95);
+        }
+
+        70% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+
+        100% {
+          transform: scale(0.95);
+        }
+      }
+    }
+
+    .all-quiz {
+      width: 80%;
+
+      .cta-see-more {
+        font-size: 1em;
+        letter-spacing: 3px;
+      }
+
+      ul {
+        margin-top: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        li {
+          margin: 20px;
+          a img {
+            width: 200px;
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE PREVIEW DU QUIZ */
+  .quiz-preview {
+    width: 80%;
+
+    .start-area {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 70px auto;
+      overflow: hidden;
+      width: 70%;
+
+      .cover-area {
+        position: relative;
+        width: 350px;
+
+        .cover {
+          width: 400px;
+          padding: 20px;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 30px;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 1;
+
+          h1 {
+            text-align: center;
+            font-size: 30px;
+            color: $lightColor;
+            font-family: "Lato";
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .description-area {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 300px;
+        height: 300px;
+        align-items: center;
+        border-left: 1px solid rgb(116, 114, 114);
+        margin-left: 100px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /*PAGE QUIZ CONTENT */
+  .quiz-container {
+    width: 60%;
+    margin: 60px auto;
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .quiz-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      margin: 0 auto;
+
+      form {
+        li {
+          width: 450px;
+        }
+      }
+
+      .quiz-img {
+        width: 40%;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************  PANEL ADMINISTRATION   ************************ */
+  /* ********************************************************************* */
+
+  /* PAGE PANNEAU ADMIN */
+  .admin-container {
+    margin-top: 30px;
+
+    h1 {
+      margin-top: 30px;
+      font-size: 1.8em;
+    }
+    .actions-admin {
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+
+      .btn-action {
+        margin: 30px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE ADMINISTRATION CATÉGORIE */
+  .add-global-content {
+    .actions-add {
+      width: 100%;
+      margin-top: 60px;
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE AJOUT CATÉGORIE */
+  .add-category {
+    width: 40%;
+    margin: 60px auto;
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE D'ÉDITION ET SUPPRESSION CATÉGORIE */
+  .editing-category-list {
+    .warning-delete {
+      text-align: center;
+    }
+    .content {
+      h1 {
+        margin-top: 60px;
+      }
+
+      .category-listing {
+        ul {
+          width: 70%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+
+          li {
+            width: auto;
+            margin: 30px;
+
+            .actions-edit {
+              a,
+              .btn-delete {
+                font-size: 1.1em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE MODIFICATION CATÉGORIE */
+  .edit-category {
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+
+    .back-btn {
+      @include returnButton();
+      padding: 15px;
+
+      a {
+        color: $lightColor;
+      }
+    }
+
+    h1 {
+      @include headingOne();
+      color: black;
+      font-size: 1.5em;
+    }
+
+    form {
+      display: flex;
+      width: 100%;
+      margin: 30px auto;
+      justify-content: center;
+      flex-direction: column;
+
+      input {
+        width: 300px;
+        margin: 10px auto;
+      }
+
+      .submit-btn {
+        margin: 30px auto;
+        padding: 10px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PANEL GESTION QUESTIONS ET RÉPONSES */
+  .manage-question-answer {
+    width: 80%;
+    margin: 0 auto;
+
+    h1 {
+      margin-top: 80px;
+      font-size: 1.5em;
+    }
+
+    .actions-add {
+      width: 60%;
+      margin: 60px auto;
+
+      .add-question-answer,
+      .edit-question-answer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE PANNEAU AJOUT QUESTION - RÉPONSES */
+  .add-question-answers {
+    margin: 20px auto;
+
+    h1 {
+      @include headingOne();
+      color: black;
+      font-size: 1.5em;
+    }
+
+    h2 {
+      @include headingTwo();
+      margin-top: 50px;
+      color: $primaryColor;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 30px auto;
+      width: 50%;
+
+      .answers-area {
+        margin: 0;
+
+        .answers {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+
+          .verify-answers {
+            display: flex;
+            justify-content: center;
+            width: 20%;
+            align-items: center;
+            padding: 20px;
+          }
+        }
+      }
+
+      input {
+        margin: 10px auto;
+      }
+
+      button {
+        margin: 30px auto;
+        padding: 15px;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 15px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        border: none;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* LISTE DES CATÉGORIES POUR MODIFIER QUESTIONS ET RÉPONSES */
+  .editing-question-list {
+    width: 100%;
+    .modal-container {
+      position: fixed;
+      visibility: hidden;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      transition: visibility 0.4s;
+    }
+
+    .modal-container.active {
+      visibility: visible;
+      transition: visibility 0s;
+    }
+
+    .overlay {
+      opacity: 0;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background: #333333d3;
+      transition: opacity 0.4s 0.2s ease-out;
+    }
+
+    .modal-container.active .overlay {
+      opacity: 1;
+      transition: opacity 0.4s ease-out;
+    }
+
+    .modal {
+      width: 95%;
+      max-width: 500px;
+      min-width: 300px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 5px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% - 50px));
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+
+      .btns {
+        display: flex;
+        margin: 10px;
+        justify-content: space-around;
+        padding: 5px;
+      }
+    }
+
+    .modal-container.active .modal {
+      opacity: 1;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+
+    .close-modal {
+      padding: 8px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      background: #ff365e;
+      color: #fff;
+    }
+
+    .warning-delete {
+      margin-bottom: 5px;
+      font-family: "Poppins";
+      font-weight: 500;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .confirm-delete,
+    .no-delete {
+      width: 50px;
+      padding: 3px;
+      color: $lightColor;
+      background: $primaryColor;
+      cursor: pointer;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: "Poppins", sans-serif;
+      border: none;
+    }
+
+    .content {
+      h1 {
+        margin-top: 60px;
+        font-size: 1.4em;
+      }
+      .question-listing {
+        width: 60%;
+        margin: 0 auto;
+
+        ul {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
+
+          li {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 30px;
+            padding: 10px;
+
+            h2 {
+              font-size: 1em;
+              font-family: "Lato";
+              margin-top: 20px;
+              padding: 10px;
+            }
+
+            img {
+              width: 90%;
+            }
+
+            .actions-edit {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* LISTE DES QUESTIONS POUR MODIFIER OU SUPPRIMER LA QUESTION + RÉPONSES */
+  .editing-question-list {
+    .warning-delete {
+      text-align: center;
+    }
+    width: 100%;
+    .content {
+      width: 100%;
+      .question-listing {
+        ul {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+
+          li {
+            width: 40%;
+            margin: 0;
+
+            img {
+              width: 250px;
+            }
+
+            .actions-edit {
+              width: auto;
+              display: flex;
+
+              a,
+              .btn-delete {
+                font-size: 0.9em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* FORMULAIRE DE MODIFICATION DE QUESTION ET RÉPONSES */
+  .edit-question-answers {
+    h1 {
+      margin-top: 70px;
+      font-size: 1.3em;
+    }
+
+    .edit-block {
+      form {
+        width: 100%;
+
+        .question-area {
+          label {
+            font-size: 1.3em;
+          }
+          input {
+            width: 100%;
+          }
+        }
+
+        .answers-area {
+          h2 {
+            margin-top: 50px;
+          }
+
+          .edit-answers {
+            label {
+              font-size: 1.3em;
+            }
+
+            .answer {
+              width: 100%;
+            }
+          }
+
+          button {
+            margin-top: 50px;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+  /* ********************************************************************* */
+  .users-section {
+    h1 {
+      margin-top: 50px;
+    }
+
+    blockquote {
+      text-align: center;
+    }
+    .users-list {
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 60px;
+
+        table {
+          margin-top: 80px;
+          width: 100%;
+          margin: 0 auto;
+          font-family: "Poppins";
+          font-size: 1em;
+
+          thead > tr > th {
+            padding-bottom: 10px;
+            padding-left: 30px;
+          }
+          tbody {
+            margin: 0 auto;
+
+            tr > td {
+              padding-top: 20px;
+              padding-left: 20px;
+              text-align: center;
+
+              border-bottom: none;
+            }
+          }
+        }
+
+        button {
+          margin-top: 10px;
+          margin-bottom: 40px;
+          color: $lightColor;
+          background: $primaryColor;
+          cursor: pointer;
+          font-size: 18px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-family: "Poppins", sans-serif;
+          border: none;
+          width: 10%;
+          margin: 60px auto;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* *********************   BACK OFFICE    ****************************** */
+  /* ********************************************************************* */
+
+  /* PAGE HOME USER */
+  .user-profile {
+    width: 80%;
+    text-align: center;
+    margin: 30px auto;
+
+    h1 {
+      @include headingOne();
+      color: black;
+      font-size: 1.5em;
+    }
+
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      margin: 100px auto;
+
+      .alert-danger {
+        width: auto;
+        height: auto;
+      }
+
+      form {
+        @include headingTwo();
+        font-size: 1em;
+        width: 50%;
+
+        h2 {
+          margin-bottom: 50px;
+          font-size: 1.3em;
+          margin-top: 20px;
+        }
+
+        .login-area,
+        .password,
+        .repeat-password {
+          width: 70%;
+          display: flex;
+          justify-content: space-between;
+          margin: 20px auto;
+        }
+
+        .btn-edit-profile {
+          color: $lightColor;
+          background: $primaryColor;
+          cursor: pointer;
+          font-size: 15px;
+          padding: 10px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          font-family: "Exo";
+          text-align: center;
+          border: none;
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE INSCRIPTION */
+
+  .inscription-area {
+    width: 100%;
+    margin-top: 60px;
+
+    h1 {
+      font-size: 2em;
+    }
+
+    .cta-connexion {
+      padding: 10px;
+    }
+
+    form {
+      margin-top: 50px;
+      .login-area,
+      .password,
+      .repeat-password {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        width: 500px;
+        @include textContent();
+      }
+
+      button {
+        padding: 10px;
+        letter-spacing: 3px;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+
+  /* PAGE DE CONNEXION */
+  .connexion-area {
+    width: 80%;
+    margin: 50px auto;
+
+    h1 {
+      text-align: center;
+      @include headingOne();
+      color: black;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    form {
+      .connexion-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        margin: 50px auto;
+
+        .login-area,
+        .password {
+          @include textContent();
+          display: flex;
+          flex-direction: row;
+        }
+      }
+
+      .connexion-btn {
+        margin: 40px auto;
+        color: $lightColor;
+        background: $primaryColor;
+        cursor: pointer;
+        font-size: 15px;
+        padding: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: "Exo";
+        text-align: center;
+        border: none;
+        margin-top: 30px;
+        display: flex;
+      }
+    }
+  }
+
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+}

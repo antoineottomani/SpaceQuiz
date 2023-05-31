@@ -1,0 +1,2791 @@
+@charset "UTF-8";
+/*  FEUILLE DE STYLE POUR SPACEQUIZ
+    Auteur : Antoine Ottomani
+*/
+/* ==============================
+    VARIABLES GLOBALES DU SITE
+============================== */
+/* Déclaration des mixins */
+@import url("https://fonts.googleapis.com/css2?family=Karla");
+@import url("https://fonts.googleapis.com/css2?family=Lato");
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+/* RESET DE CERTAINS ÉLEMENTS */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* =============================
+    CONTENEUR PRINCIPAL DU SITE
+  ============================== */
+main {
+  display: flex;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+/* ********************************************************************* */
+/* ********** ========   MOBILE FIRST   ======= *********************** */
+/* ********************************************************************* */
+/*HEADER */
+header {
+  background-color: #1d1d1d;
+  width: 100%;
+  top: 0;
+  position: sticky;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* MENU BURGER POUR MOBILE */
+  /* BARRE DE NAVIGATION */
+}
+header .site-brand {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+header .site-brand .logo-brand {
+  display: inline-block;
+  margin-bottom: 5px;
+  width: 20%;
+}
+header .site-brand .title-brand {
+  font-size: 1.5em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  margin-left: 25%;
+}
+header .burger {
+  cursor: pointer;
+  float: right;
+  padding: 40px 30px;
+}
+header .burger-line {
+  background: #ffffff;
+  display: block;
+  height: 2px;
+  position: relative;
+  width: 20px;
+}
+header .burger-line::before,
+header .burger-line::after {
+  background: #ffffff;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.1s ease-out;
+  width: 100%;
+}
+header .burger-line::before {
+  top: 5px;
+}
+header .burger-line::after {
+  top: -5px;
+}
+header .side-menu {
+  display: none;
+}
+header .side-menu:checked ~ nav {
+  max-height: 100%;
+  top: 80px;
+}
+header .side-menu:checked ~ .burger .burger-line {
+  background: transparent;
+}
+header .side-menu:checked ~ .burger .burger-line::before {
+  transform: rotate(-45deg);
+  top: 0;
+  z-index: 1;
+}
+header .side-menu:checked ~ .burger .burger-line::after {
+  transform: rotate(45deg);
+  top: 0;
+  z-index: 1;
+}
+header nav {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #1d1d1d;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+  top: 80px;
+}
+header nav ul a {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  display: block;
+  padding: 20px;
+  margin: 30px 40px;
+  cursor: pointer;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE ACCUEIL */
+.home-container {
+  margin: 0 auto;
+  width: 100%;
+}
+.home-container .banner {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0, rgba(0, 0, 0, 0.3) 100%), url(../img/main/banner.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 250px;
+}
+.home-container .banner h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 80px;
+}
+.home-container .banner i {
+  display: none;
+}
+.home-container .all-quiz {
+  margin: 60px auto;
+  text-align: center;
+  width: 100%;
+}
+.home-container .all-quiz h2 {
+  color: #1d1d1d;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 1.3em;
+}
+.home-container .all-quiz .cta-see-more {
+  width: 100%;
+  background-color: #fb7d00;
+  padding: 10px;
+}
+.home-container .all-quiz .cta-see-more a {
+  color: #ffffff;
+  font-size: 1.3em;
+  font-family: "Poppins", sans-serif;
+  padding: 10px;
+}
+.home-container .all-quiz ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 50px auto;
+}
+.home-container .all-quiz ul li {
+  margin: auto;
+}
+.home-container .all-quiz ul li a img {
+  width: 150px;
+}
+.home-container .all-quiz ul li a h3 {
+  color: #1d1d1d;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  font-size: 1em;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE PREVIEW QUIZ */
+.quiz-preview {
+  width: 100%;
+  margin: 30px auto;
+}
+.quiz-preview .start-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.quiz-preview .start-area .cover {
+  width: 350px;
+  padding: 20px;
+}
+.quiz-preview .start-area .overlay h1 {
+  margin-top: 10px;
+  font-size: 2em;
+  font-family: "Lato";
+  text-align: center;
+}
+.quiz-preview .start-area .description-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.quiz-preview .start-area .description-area p {
+  margin-top: 0;
+  font-size: 1.2em;
+  font-family: "Karla";
+}
+.quiz-preview .start-area .description-area .play {
+  padding: 10px 25px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Exo";
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE CONTENU DE QUIZ */
+.quiz-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin: 10px auto;
+}
+.quiz-container h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  font-size: 1.1em;
+  padding: 10px;
+  color: black;
+}
+.quiz-container .quiz-card {
+  margin-top: 0px;
+}
+.quiz-container .quiz-card form .choices {
+  padding: 0;
+}
+.quiz-container .quiz-card form .choices li {
+  background-color: #e8e8e8;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  font-family: "Karla";
+  font-size: 1em;
+  margin: 15px;
+}
+.quiz-container .quiz-card form .choices li:hover {
+  background-color: #fb7d00;
+  color: #ffffff;
+}
+.quiz-container .quiz-card form .choices li input[type=radio] {
+  width: 20px;
+}
+.quiz-container .quiz-card form .next-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.quiz-container .quiz-card form .next-question .submit-answer {
+  margin: 1px;
+  width: 120px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+.quiz-container .quiz-card form .next-question i {
+  margin-top: 20px;
+  font-size: 2.5em;
+}
+.quiz-container .quiz-card form .next-question i:hover {
+  color: #fb7d00;
+}
+.quiz-container .quiz-img {
+  width: 330px;
+  margin: 30px auto;
+}
+.quiz-container .quiz-img .thumbnail {
+  width: 100%;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE DES RÉSULTATS DU QUIZ */
+.quiz-preview .start-area .description-area > p {
+  margin: 20px;
+}
+
+/* ********************************************************************* */
+/* ******************   PARTIE BACK OFFICE     ************************ */
+/* ********************************************************************* */
+/* PAGE PANNEL ADMIN */
+.admin-container {
+  width: 100%;
+  margin: 40px auto;
+}
+.admin-container h1 {
+  text-align: center;
+  font-family: "Lato", sans-serif;
+}
+.admin-container .actions-admin {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 60px auto;
+  text-align: center;
+  font-size: 0.9em;
+}
+.admin-container .actions-admin .category-area,
+.admin-container .actions-admin .question-answers-area,
+.admin-container .actions-admin .user-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+}
+.admin-container .actions-admin .category-area .btn-action,
+.admin-container .actions-admin .question-answers-area .btn-action,
+.admin-container .actions-admin .user-area .btn-action {
+  text-align: center;
+  font-size: 1.2em;
+  font-family: "Poppins";
+  color: black;
+}
+.admin-container .actions-admin .category-area .btn-action i,
+.admin-container .actions-admin .question-answers-area .btn-action i,
+.admin-container .actions-admin .user-area .btn-action i {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  background-color: #fb7d00;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 14px;
+  margin-right: 30px;
+  font-size: 1.9em;
+  vertical-align: middle;
+}
+
+/* ********************************************************************* */
+/* ***************     PARTIE CATÉGORIE     ************************** */
+/* ********************************************************************* */
+/*PAGE ADMINISTRATION CATÉGORIE*/
+.add-global-content {
+  margin: 40px auto;
+}
+.add-global-content .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-global-content .back-btn a {
+  color: #ffffff;
+}
+.add-global-content h1 {
+  text-align: center;
+  font-family: "Lato";
+  margin-top: 40px;
+}
+.add-global-content .actions-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.add-global-content .actions-add .edit-category,
+.add-global-content .actions-add .add-category {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 40px auto;
+}
+.add-global-content .actions-add .edit-category a,
+.add-global-content .actions-add .add-category a {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  color: black;
+  padding: 10px;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}
+.add-global-content .actions-add .edit-category a i,
+.add-global-content .actions-add .add-category a i {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  background-color: #fb7d00;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 14px;
+  margin-right: 40px;
+  font-size: 1.5em;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE D'AJOUT DE LA CATÉGORIE */
+.add-category {
+  width: 100%;
+  margin: 0px auto;
+}
+.add-category .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.add-category .back-btn a {
+  color: #ffffff;
+}
+.add-category h1 {
+  font-size: 1.5em;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin-top: 20px;
+}
+.add-category form {
+  width: 100%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-category form input {
+  width: 70%;
+  margin: 10px;
+  font-size: 1.1em;
+  text-align: center;
+  border: 1px solid #fb7d00;
+}
+.add-category form input[type=file] {
+  border: none;
+}
+.add-category form .choice-one,
+.add-category form .choice-two {
+  font-size: 1em;
+  font-family: "Lato";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+.add-category form .submit-btn {
+  margin-top: 20px;
+  width: 120px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE D'ÉDITION ET SUPPRESSION CATÉGORIE */
+.editing-category-list {
+  width: 100%;
+}
+.editing-category-list .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.editing-category-list .back-btn a {
+  color: #ffffff;
+}
+.editing-category-list .modal-container {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: visibility 0.4s;
+}
+.editing-category-list .modal-container.active {
+  visibility: visible;
+  transition: visibility 0s;
+}
+.editing-category-list .overlay {
+  opacity: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(51, 51, 51, 0.8274509804);
+  transition: opacity 0.4s 0.2s ease-out;
+}
+.editing-category-list .modal-container.active .overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+.editing-category-list .modal {
+  width: 95%;
+  max-width: 500px;
+  min-width: 300px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.editing-category-list .modal .btns {
+  display: flex;
+  margin: 10px;
+  justify-content: space-around;
+  padding: 5px;
+}
+.editing-category-list .modal-container.active .modal {
+  opacity: 1;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.editing-category-list .close-modal {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: #ff365e;
+  color: #fff;
+}
+.editing-category-list .warning-delete {
+  margin-bottom: 5px;
+  font-family: "Poppins";
+  font-weight: 500;
+  margin-top: 30px;
+}
+.editing-category-list .confirm-delete,
+.editing-category-list .no-delete {
+  width: 50px;
+  padding: 3px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+.editing-category-list .content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.editing-category-list .content blockquote {
+  background-color: #fb7d00;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-family: "Karla";
+}
+.editing-category-list .content h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+  margin-top: 30px;
+}
+.editing-category-list .content .category-listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.editing-category-list .content .category-listing ul {
+  padding: 0;
+  margin: 0;
+}
+.editing-category-list .content .category-listing ul li {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+.editing-category-list .content .category-listing ul li h2 {
+  font-size: 1.5em;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+}
+.editing-category-list .content .category-listing ul li .thumbnail-edit {
+  width: 250px;
+}
+.editing-category-list .content .category-listing ul li .actions-edit {
+  margin: 20px auto;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.editing-category-list .content .category-listing ul li .actions-edit a {
+  margin: 1px;
+  width: 48%;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+.editing-category-list .content .category-listing ul li .actions-edit .btn-delete {
+  margin: 1px;
+  width: 48%;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE DE FORM POUR L'ÉDITION DE CATÉGORIE  */
+.edit-category {
+  margin: 0 auto;
+  width: 100%;
+}
+.edit-category .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.edit-category .back-btn a {
+  color: #ffffff;
+}
+.edit-category h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+}
+.edit-category form {
+  display: flex;
+  flex-direction: column;
+}
+.edit-category form label {
+  text-align: center;
+  font-size: 1em;
+  font-family: "Poppins";
+  margin-top: 20px;
+}
+.edit-category form input {
+  width: 60%;
+  margin: 10px auto;
+  border: 1px solid #fb7d00;
+  font-size: 1em;
+  font-family: "Poppins";
+  text-align: center;
+}
+.edit-category form input[type=file] {
+  border: none;
+}
+.edit-category form img {
+  width: 250px;
+  margin: 10px auto;
+}
+.edit-category form .user-choices {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Poppins";
+  font-size: 0.9em;
+}
+.edit-category form .edit-form-btn {
+  margin: 10px auto;
+}
+.edit-category form .edit-form-btn .submit-btn {
+  margin: 30px auto;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+/* ********************************************************************* */
+/* ************   PARTIE QUESTION & RÉPONSES     *********************** */
+/* ********************************************************************* */
+/* PAGE DE GESTION DES QUESTIONS ET RÉPONSES */
+.manage-question-answer {
+  width: 100%;
+}
+.manage-question-answer .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.manage-question-answer .back-btn a {
+  color: #ffffff;
+}
+.manage-question-answer h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.3em;
+  margin-top: 40px;
+}
+.manage-question-answer .actions-add {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.manage-question-answer .actions-add .add-question-answer,
+.manage-question-answer .actions-add .edit-question-answer {
+  margin: 50px 30px;
+}
+.manage-question-answer .actions-add .add-question-answer i,
+.manage-question-answer .actions-add .edit-question-answer i {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  background-color: #fb7d00;
+  color: #ffffff;
+  text-align: center;
+  padding-top: 14px;
+  margin-right: 40px;
+  font-size: 1.5em;
+}
+.manage-question-answer .actions-add .add-question-answer a,
+.manage-question-answer .actions-add .edit-question-answer a {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  color: black;
+  padding: 10px;
+  font-size: 1.3em;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE D'AJOUT DE QUESTIONS ET RÉPONSES */
+.add-question-answers {
+  width: 100%;
+}
+.add-question-answers .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.add-question-answers .back-btn a {
+  color: #ffffff;
+}
+.add-question-answers h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  margin-top: 30px;
+  font-size: 1.3em;
+}
+.add-question-answers form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-question-answers form .question-area,
+.add-question-answers form .answers-area {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-question-answers form .question-area h2,
+.add-question-answers form .answers-area h2 {
+  font-size: 1.5em;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+  font-size: 1.3em;
+}
+.add-question-answers form .question-area input,
+.add-question-answers form .answers-area input {
+  border: 1px solid #fb7d00;
+  margin: 10px;
+  width: 80%;
+  text-align: center;
+  font-size: 1.1em;
+}
+.add-question-answers form .question-area input[type=file],
+.add-question-answers form .answers-area input[type=file] {
+  border: none;
+}
+.add-question-answers form .question-area select,
+.add-question-answers form .answers-area select {
+  border: 1px solid #fb7d00;
+  margin-bottom: 40px;
+  width: 80%;
+  text-align: center;
+  font-size: 1.1em;
+}
+.add-question-answers form .question-area .answers,
+.add-question-answers form .answers-area .answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.add-question-answers form .question-area .answers .input-answer,
+.add-question-answers form .answers-area .answers .input-answer {
+  width: 80%;
+  margin-top: 20px;
+}
+.add-question-answers form .question-area .answers .verify-answers,
+.add-question-answers form .answers-area .answers .verify-answers {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+  font-family: "Lato";
+}
+.add-question-answers form button {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* LISTING DES CATÉGORIES POUR MODIFIER LEURS QUESTIONS ET RÉPONSES */
+.editing-category-list .warning-delete {
+  font-size: 0.8em;
+  text-align: center;
+}
+.editing-category-list .content > .category-listing > ul > li .actions-edit {
+  width: 100%;
+}
+.editing-category-list .content > .category-listing > ul > li .actions-edit .see-questions {
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  width: 100%;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE D'ÉDITION ET DE SUPPRESSION DES QUESTIONS */
+.editing-question-list .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+}
+.editing-question-list .back-btn a {
+  color: #ffffff;
+}
+.editing-question-list .modal-container {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: visibility 0.4s;
+}
+.editing-question-list .modal-container.active {
+  visibility: visible;
+  transition: visibility 0s;
+}
+.editing-question-list .overlay {
+  opacity: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(51, 51, 51, 0.8274509804);
+  transition: opacity 0.4s 0.2s ease-out;
+}
+.editing-question-list .modal-container.active .overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease-out;
+}
+.editing-question-list .modal {
+  width: 95%;
+  max-width: 500px;
+  min-width: 300px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.editing-question-list .modal .btns {
+  display: flex;
+  margin: 10px;
+  justify-content: space-around;
+  padding: 5px;
+}
+.editing-question-list .modal-container.active .modal {
+  opacity: 1;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.editing-question-list .close-modal {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: #ff365e;
+  color: #fff;
+}
+.editing-question-list .warning-delete {
+  margin-bottom: 5px;
+  font-family: "Poppins";
+  font-weight: 500;
+  margin-top: 30px;
+  font-size: 0.8em;
+  text-align: center;
+}
+.editing-question-list .confirm-delete,
+.editing-question-list .no-delete {
+  width: 50px;
+  padding: 3px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+.editing-question-list .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.editing-question-list .content blockquote {
+  background-color: #fb7d00;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-family: "Karla";
+}
+.editing-question-list .content h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  text-align: center;
+  font-size: 1.3em;
+  margin-top: 30px;
+}
+.editing-question-list .content .question-listing {
+  width: 80%;
+}
+.editing-question-list .content .question-listing ul {
+  padding: 0;
+}
+.editing-question-list .content .question-listing ul li {
+  text-align: center;
+  margin-top: 30px;
+}
+.editing-question-list .content .question-listing ul li h2 {
+  font-size: 1.1em;
+  padding: 10px;
+  font-family: "Karla";
+}
+.editing-question-list .content .question-listing ul li .actions-edit {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  margin: 10px auto;
+  text-align: center;
+}
+.editing-question-list .content .question-listing ul li .actions-edit a {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  width: 50%;
+}
+.editing-question-list .content .question-listing ul li .actions-edit button {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  margin-left: 10px;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE DE FORMULAIRE DE MODIFICATION DE QUESTIONS ET RÉPONSES */
+.edit-question-answers {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+.edit-question-answers .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+  padding: 20px;
+}
+.edit-question-answers .back-btn a {
+  color: #ffffff;
+}
+.edit-question-answers h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+.edit-question-answers .edit-block form {
+  margin: 30px auto;
+  width: 80%;
+}
+.edit-question-answers .edit-block form .question-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.edit-question-answers .edit-block form .question-area label {
+  text-align: center;
+  font-size: 1.1em;
+  font-family: "Poppins";
+  margin-top: 20px;
+}
+.edit-question-answers .edit-block form .question-area input {
+  border: 1px solid #fb7d00;
+  margin: 10px;
+  text-align: center;
+  font-size: 1em;
+}
+.edit-question-answers .edit-block form .question-area input[type=file] {
+  border: none;
+}
+.edit-question-answers .edit-block form .answers-area {
+  margin: 0 auto;
+}
+.edit-question-answers .edit-block form .answers-area h2 {
+  text-align: center;
+  font-size: 1.5em;
+  font-family: "Karla";
+}
+.edit-question-answers .edit-block form .answers-area .edit-answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.edit-question-answers .edit-block form .answers-area .edit-answers input {
+  border: 1px solid #fb7d00;
+  margin: 10px;
+  text-align: center;
+  font-size: 1em;
+}
+.edit-question-answers .edit-block form .answers-area .edit-answers .is-correct {
+  text-align: center;
+}
+.edit-question-answers .edit-block form .answers-area .edit-answers .is-correct label {
+  text-align: center;
+  font-size: 1.1em;
+  font-family: "Poppins";
+  margin-top: 20px;
+}
+.edit-question-answers .edit-block form button {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  margin-left: 10px;
+}
+
+/* ********************************************************************* */
+/* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+/* ********************************************************************* */
+.users-section {
+  width: 100%;
+}
+.users-section .back-btn {
+  background-color: #fb7d00;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 30px;
+  padding: 20px;
+}
+.users-section .back-btn a {
+  color: #ffffff;
+}
+.users-section h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.3em;
+  margin-top: 50px;
+}
+.users-section blockquote {
+  background-color: #fb7d00;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-family: "Karla";
+}
+.users-section .users-list {
+  width: 90%;
+  margin: 0 auto;
+}
+.users-section .users-list form table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  font-family: "Poppins";
+  font-size: 0.8em;
+}
+.users-section .users-list form table thead {
+  border-bottom: 1px solid #fb7d00;
+  padding-bottom: 10px;
+  width: 100%;
+  margin: 20px auto;
+  display: inline;
+}
+.users-section .users-list form table thead tr {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.users-section .users-list form table thead th {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.users-section .users-list form table tbody > tr > td {
+  border-bottom: 1px solid #1d1d1d;
+}
+.users-section .users-list form table tbody > tr > td label {
+  display: inline;
+}
+.users-section .users-list form button {
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 5px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  margin-left: 25%;
+}
+
+/* ********************************************************************* */
+/* ************** INSCRIPTION / CONNEXION / MON COMPTE  **************** */
+/* ********************************************************************* */
+/* PAGE D'INSCRIPTION */
+.inscription-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+.inscription-area h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.8em;
+  margin-top: 30px;
+}
+.inscription-area h2 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.1em;
+  margin-top: 20px;
+}
+.inscription-area .cta-connexion {
+  padding: 15px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  display: block;
+}
+.inscription-area form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-top: 50px;
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+  font-size: 1em;
+}
+.inscription-area form label {
+  font-size: 1em;
+}
+.inscription-area form input {
+  width: 40%;
+  border: 1px solid #fb7d00;
+}
+.inscription-area form button {
+  margin: 50px auto;
+  padding: 15px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+}
+.inscription-area form .login-area,
+.inscription-area form .password,
+.inscription-area form .repeat-password {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE CONNEXION */
+.connexion-area {
+  width: 100%;
+}
+.connexion-area h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.5em;
+  margin-top: 50px;
+}
+.connexion-area .alert-danger {
+  background-color: #fb7d00;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.1em;
+  padding: 5px;
+  font-family: "Karla", sans-serif;
+}
+.connexion-area form .connexion-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.connexion-area form .connexion-content input {
+  margin: 20px;
+  border: 1px solid #fb7d00;
+}
+.connexion-area form .connexion-content .login-area,
+.connexion-area form .connexion-content .password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+  font-size: 1em;
+}
+.connexion-area form .connexion-btn {
+  margin: 50px auto;
+  padding: 15px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  display: flex;
+}
+
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* ********************************************************************* */
+/* PAGE PROFILE USER */
+.user-profile {
+  width: 100%;
+  margin-top: 20px;
+}
+.user-profile h1 {
+  font-size: 1em;
+  font-family: "Lato", sans-serif;
+  color: #ffffff;
+  line-height: 1.5em;
+  text-align: center;
+  color: black;
+  font-size: 1.3em;
+}
+.user-profile .alert-danger {
+  background-color: #fb7d00;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.1em;
+  padding: 5px;
+  font-family: "Karla", sans-serif;
+}
+.user-profile .content-area {
+  width: 100%;
+  margin: 20px auto;
+}
+.user-profile .content-area form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.user-profile .content-area form h2 {
+  font-size: 1.5em;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+  font-size: 1.3em;
+  margin-top: 50px;
+}
+.user-profile .content-area form .login-area,
+.user-profile .content-area form .password,
+.user-profile .content-area form .repeat-password {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  flex-direction: column;
+}
+.user-profile .content-area form .login-area input,
+.user-profile .content-area form .password input,
+.user-profile .content-area form .repeat-password input {
+  border: 1px solid #fb7d00;
+}
+.user-profile .content-area form .login-area label,
+.user-profile .content-area form .password label,
+.user-profile .content-area form .repeat-password label {
+  font-size: 1em;
+  font-family: "Poppins";
+  text-align: center;
+  margin-bottom: 10px;
+}
+.user-profile .content-area form .btn-edit-profile {
+  margin: 30px auto;
+  padding: 10px;
+  color: #ffffff;
+  background: #fb7d00;
+  cursor: pointer;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  display: flex;
+  margin-top: 20px;
+}
+.user-profile .content-area .statistics h2 {
+  font-size: 1.5em;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+  font-size: 1.5em;
+}
+
+/* ********************************************************************* */
+/* *******  ===== TABLET MEDIA QUERIES : 768 - 992 PX ========   ****** */
+/* ********************************************************************* */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* HEADER */
+  header .site-brand .title-brand {
+    margin-left: 25%;
+    font-size: 2em;
+  }
+  header .side-menu:checked ~ nav {
+    max-height: 100%;
+    top: 140px;
+  }
+  header nav ul a {
+    font-size: 1.4em;
+    margin-top: 70px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE D'ACCUEIL */
+  .home-container .banner {
+    height: 550px;
+  }
+  .home-container .banner h1 {
+    font-size: 1.6em;
+    padding-top: 150px;
+  }
+  .home-container .all-quiz {
+    width: 100%;
+  }
+  .home-container .all-quiz h2 {
+    font-size: 1.9em;
+  }
+  .home-container .all-quiz .cta-see-more {
+    padding: 15px;
+  }
+  .home-container .all-quiz .cta-see-more a {
+    font-size: 1.7em;
+  }
+  .home-container .all-quiz ul {
+    display: flex;
+    justify-content: center;
+  }
+  .home-container .all-quiz ul li {
+    margin: 30px;
+  }
+  .home-container .all-quiz ul li a img {
+    width: 200px;
+  }
+  .home-container .all-quiz ul li a h3 {
+    font-size: 1.6em;
+    padding: 5px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE PREVIEW QUIZ */
+  .quiz-preview {
+    width: 100%;
+    margin: 50px auto;
+  }
+  .quiz-preview .start-area {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin-top: 40px;
+    border-radius: 10px;
+  }
+  .quiz-preview .start-area .cover {
+    width: 100%;
+  }
+  .quiz-preview .start-area .overlay h1 {
+    font-size: 2em;
+  }
+  .quiz-preview .start-area .description-area p {
+    font-size: 1.5em;
+  }
+  .quiz-preview .start-area .description-area .play {
+    margin-bottom: 30px;
+    font-size: 1.8em;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE QUIZ CONTENT */
+  .quiz-container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+  }
+  .quiz-container h2 {
+    font-size: 1.8em;
+    margin-top: 100px;
+  }
+  .quiz-container .quiz-form {
+    display: flex;
+  }
+  .quiz-container .quiz-form form {
+    margin: auto;
+  }
+  .quiz-container .quiz-form form ul {
+    margin: auto;
+  }
+  .quiz-container .quiz-form form ul li {
+    width: 500px;
+    padding: 0;
+    margin: auto;
+  }
+  .quiz-container .quiz-form form .next-question .submit-answer {
+    font-size: 1.5em;
+    width: auto;
+  }
+  .quiz-container .quiz-form form .next-question i {
+    font-size: 40px;
+  }
+  .quiz-container .quiz-img {
+    margin-top: 80px;
+    width: 60%;
+  }
+  /* ********************************************************************* */
+  /* *********************  ADMIN PANEL  ********************************* */
+  /* ********************************************************************* */
+  /* PAGE ADMIN PANEL */
+  .admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .admin-container h1 {
+    margin-top: 30px;
+    font-size: 2em;
+  }
+  .admin-container .actions-admin {
+    display: flex;
+  }
+  .admin-container .actions-admin .category-area,
+.admin-container .actions-admin .question-answers-area,
+.admin-container .actions-admin .user-area {
+    font-size: 1.3em;
+    display: flex;
+  }
+  .admin-container .actions-admin .category-area .btn-action,
+.admin-container .actions-admin .question-answers-area .btn-action,
+.admin-container .actions-admin .user-area .btn-action {
+    font-size: 1.2em;
+  }
+  .admin-container .actions-admin .category-area .btn-action i,
+.admin-container .actions-admin .question-answers-area .btn-action i,
+.admin-container .actions-admin .user-area .btn-action i {
+    width: 90px;
+    height: 90px;
+    border-radius: 60px;
+    padding-top: 25px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE ADMINISTRATION DE LA CATÉGORIE */
+  .add-global-content {
+    width: 100%;
+  }
+  .add-global-content .back-btn {
+    background-color: #fb7d00;
+    width: 40px;
+    height: 40px;
+    border-radius: 60%;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 30px;
+  }
+  .add-global-content .back-btn a {
+    color: #ffffff;
+  }
+  .add-global-content h1 {
+    font-size: 2em;
+  }
+  .add-global-content .actions-add .add-category .btn-add,
+.add-global-content .actions-add .edit-category .btn-add {
+    margin: 50px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50px;
+    display: block;
+  }
+  .add-global-content .actions-add .add-category .btn-add i,
+.add-global-content .actions-add .edit-category .btn-add i {
+    font-size: 30px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE AJOUT CATÉGORIE */
+  .add-category h1 {
+    font-size: 1.8em;
+  }
+  .add-category form {
+    margin-top: 60px;
+  }
+  .add-category form input {
+    font-size: 1.4em;
+  }
+  .add-category form .choice-one,
+.add-category form .choice-two {
+    font-family: "Lato", sans-serif;
+    margin-top: 30px;
+    font-size: 1.2em;
+  }
+  .add-category form .submit-btn {
+    font-size: 1.4em;
+    width: auto;
+    letter-spacing: 2px;
+    margin-top: 50px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE GESTION DES CATÉGORIES POUR LES ÉDITER OU SUPPRIMER */
+  .editing-category-list .content h1 {
+    font-size: 1.8em;
+  }
+  .editing-category-list .content .category-listing ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .editing-category-list .content .category-listing ul li {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .editing-category-list .content .category-listing ul li .thumbnail-edit {
+    width: 300px;
+  }
+  .editing-category-list .content .category-listing ul li .actions-edit {
+    width: 90%;
+  }
+  .editing-category-list .content .category-listing ul li .actions-edit a {
+    font-size: 1.2em;
+  }
+  .editing-category-list .content .category-listing ul li .actions-edit .btn-delete {
+    font-size: 1.2em;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE D'ÉDITION DE CATÉGORIE */
+  .edit-category h1 {
+    font-size: 1.8em;
+    margin-top: 40px;
+  }
+  .edit-category form label {
+    font-size: 1.3em;
+  }
+  .edit-category form input {
+    width: 100%;
+    font-size: 1.1em;
+  }
+  .edit-category form .user-choices {
+    font-size: 1.2em;
+  }
+  .edit-category form .edit-form-btn .submit-btn {
+    font-size: 1.3em;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PANNEL DE GESTION DE QUESTIONS ET RÉPONSES */
+  .manage-question-answer h1 {
+    font-size: 1.6em;
+    margin-top: 60px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE AJOUT DE QUESTIONS ET RÉPONSES */
+  .add-question-answers h1 {
+    font-size: 1.6em;
+    margin-top: 60px;
+  }
+  .add-question-answers .question-block form h2 {
+    font-size: 1.4em;
+  }
+  .add-question-answers .question-block form input,
+.add-question-answers .question-block form select {
+    width: 60%;
+    font-size: 1.3em;
+  }
+  .add-question-answers .question-block form .answers-area {
+    margin-top: 0;
+  }
+  .add-question-answers .question-block form .answers-area .answers input {
+    width: 60%;
+  }
+  .add-question-answers .question-block form .answers-area .answers label {
+    font-size: 1.2em;
+  }
+  .add-question-answers .question-block form button {
+    font-size: 1.3em;
+    padding: 10px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE DE LISTE DES QUESTIONS POUR EDITER ET SUPPRIMER LES QUESTIONS RÉPONSES */
+  .editing-question-list {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .editing-question-list .content h1 {
+    font-size: 1.8em;
+    margin-top: 60px;
+  }
+  .editing-question-list .content .question-listing {
+    width: 80%;
+  }
+  .editing-question-list .content .question-listing ul li h2 {
+    font-size: 1.3em;
+    padding: 5px;
+  }
+  .editing-question-list .content .question-listing ul li img {
+    width: 350px;
+  }
+  .editing-question-list .content .question-listing ul li .actions-edit {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .editing-question-list .content .question-listing ul li .actions-edit a,
+.editing-question-list .content .question-listing ul li .actions-edit button {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE DE FORMULAIRE DE MODIFICATION DE QUESTION ET RÉPONSES */
+  .edit-question-answers {
+    width: 70%;
+  }
+  .edit-question-answers h1 {
+    font-size: 1.8em;
+    margin-top: 60px;
+  }
+  .edit-question-answers .edit-block form .question-area label {
+    font-size: 1.5em;
+  }
+  .edit-question-answers .edit-block form .question-area input {
+    font-size: 1.3em;
+    width: 100%;
+  }
+  .edit-question-answers .edit-block form .answers-area h2 {
+    font-size: 1.8em;
+    margin-top: 50px;
+  }
+  .edit-question-answers .edit-block form .answers-area .edit-answers input {
+    font-size: 1.3em;
+    width: 100%;
+  }
+  .edit-question-answers .edit-block form button {
+    font-size: 1.3em;
+    margin-top: 30px;
+    padding: 10px;
+  }
+  /* ********************************************************************* */
+  /* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+  /* ********************************************************************* */
+  .users-section h1 {
+    font-size: 2em;
+    margin-top: 100px;
+  }
+  .users-section .users-list {
+    width: 80%;
+    margin: 60px auto;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    padding: 10px;
+    margin-top: 70px;
+  }
+  /* ********************************************************************* */
+  /* *********  PARTIE CONNEXION / INSCRIPTION / COMPTE     ************** */
+  /* ********************************************************************* */
+  /* PAGE INSCRIPTION */
+  .inscription-area h1 {
+    font-size: 2em;
+  }
+  .inscription-area h2 {
+    font-size: 1.6em;
+  }
+  .inscription-area .cta-connexion {
+    font-size: 1.1em;
+    padding: 15px;
+  }
+  .inscription-area form {
+    width: 80%;
+    margin-top: 70px;
+  }
+  .inscription-area form label {
+    font-size: 1.2em;
+  }
+  .inscription-area form input {
+    width: 40%;
+  }
+  .inscription-area form button {
+    font-size: 1.3em;
+    margin-top: 100px;
+    padding: 15px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE CONNEXION */
+  .connexion-area h1 {
+    font-size: 2em;
+  }
+  .connexion-area form {
+    width: 80%;
+    margin: 80px auto;
+  }
+  .connexion-area form .connexion-content label {
+    font-size: 1.3em;
+  }
+  .connexion-area form .connexion-content input {
+    width: 50%;
+  }
+  .connexion-area form .connexion-btn {
+    font-size: 1.2em;
+    margin-top: 80px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE PROFIL UTILISATEUR */
+  .user-profile h1 {
+    font-size: 1.5em;
+    margin-top: 50px;
+  }
+  .user-profile .content-area form h2 {
+    font-size: 1.4em;
+    margin-bottom: 30px;
+  }
+  .user-profile .content-area form .login-area,
+.user-profile .content-area form .password,
+.user-profile .content-area form .repeat-password {
+    width: 30%;
+  }
+  .user-profile .content-area form .login-area label,
+.user-profile .content-area form .password label,
+.user-profile .content-area form .repeat-password label {
+    font-size: 1.2em;
+  }
+  .user-profile .content-area form .login-area input,
+.user-profile .content-area form .password input,
+.user-profile .content-area form .repeat-password input {
+    width: 100%;
+  }
+  .user-profile .content-area form .btn-edit-profile {
+    font-size: 1.3em;
+    letter-spacing: 2px;
+  }
+}
+/* ********************************************************************* */
+/* ********* ======== DESKTOP MEDIA QUERIES  > 992px ========  ********* */
+/* ********************************************************************* */
+@media only screen and (min-width: 992px) {
+  /* PARTIE HEADER */
+  header {
+    z-index: 100;
+  }
+  header .site-brand .logo-brand {
+    width: 120px;
+  }
+  header .site-brand .title-brand {
+    margin-left: 30px;
+  }
+  header .burger {
+    display: none;
+  }
+  header nav {
+    max-height: none;
+    top: 0;
+    position: relative;
+    float: right;
+  }
+  header nav .menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+  }
+  header nav .menu a {
+    margin: 5px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE D'ACCUEIL */
+  .home-container .banner {
+    height: 100%;
+  }
+  .home-container .banner h1 {
+    font-size: 1.5em;
+    padding-top: 300px;
+  }
+  .home-container .banner i {
+    font-size: 45px;
+    display: flex;
+    margin-top: 70px;
+    color: #ffffff;
+    transform: scale(1);
+    animation: pulse 2s infinite;
+    justify-content: center;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+    }
+    70% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(0.95);
+    }
+  }
+  .home-container .all-quiz {
+    width: 80%;
+  }
+  .home-container .all-quiz .cta-see-more {
+    font-size: 1em;
+    letter-spacing: 3px;
+  }
+  .home-container .all-quiz ul {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .home-container .all-quiz ul li {
+    margin: 20px;
+  }
+  .home-container .all-quiz ul li a img {
+    width: 200px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE PREVIEW DU QUIZ */
+  .quiz-preview {
+    width: 80%;
+  }
+  .quiz-preview .start-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 70px auto;
+    overflow: hidden;
+    width: 70%;
+  }
+  .quiz-preview .start-area .cover-area {
+    position: relative;
+    width: 350px;
+  }
+  .quiz-preview .start-area .cover-area .cover {
+    width: 400px;
+    padding: 20px;
+  }
+  .quiz-preview .start-area .cover-area .overlay {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+  }
+  .quiz-preview .start-area .cover-area .overlay h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #ffffff;
+    font-family: "Lato";
+    text-transform: uppercase;
+  }
+  .quiz-preview .start-area .description-area {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    border-left: 1px solid rgb(116, 114, 114);
+    margin-left: 100px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /*PAGE QUIZ CONTENT */
+  .quiz-container {
+    width: 60%;
+    margin: 60px auto;
+  }
+  .quiz-container h2 {
+    font-size: 1.5em;
+  }
+  .quiz-container .quiz-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .quiz-container .quiz-card form li {
+    width: 450px;
+  }
+  .quiz-container .quiz-card .quiz-img {
+    width: 40%;
+  }
+  /* ********************************************************************* */
+  /* ********************  PANEL ADMINISTRATION   ************************ */
+  /* ********************************************************************* */
+  /* PAGE PANNEAU ADMIN */
+  .admin-container {
+    margin-top: 30px;
+  }
+  .admin-container h1 {
+    margin-top: 30px;
+    font-size: 1.8em;
+  }
+  .admin-container .actions-admin {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  .admin-container .actions-admin .btn-action {
+    margin: 30px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE ADMINISTRATION CATÉGORIE */
+  .add-global-content .actions-add {
+    width: 100%;
+    margin-top: 60px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE AJOUT CATÉGORIE */
+  .add-category {
+    width: 40%;
+    margin: 60px auto;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE D'ÉDITION ET SUPPRESSION CATÉGORIE */
+  .editing-category-list .warning-delete {
+    text-align: center;
+  }
+  .editing-category-list .content h1 {
+    margin-top: 60px;
+  }
+  .editing-category-list .content .category-listing ul {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .editing-category-list .content .category-listing ul li {
+    width: auto;
+    margin: 30px;
+  }
+  .editing-category-list .content .category-listing ul li .actions-edit a,
+.editing-category-list .content .category-listing ul li .actions-edit .btn-delete {
+    font-size: 1.1em;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE MODIFICATION CATÉGORIE */
+  .edit-category {
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .edit-category .back-btn {
+    background-color: #fb7d00;
+    width: 40px;
+    height: 40px;
+    border-radius: 60%;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }
+  .edit-category .back-btn a {
+    color: #ffffff;
+  }
+  .edit-category h1 {
+    font-size: 1em;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    line-height: 1.5em;
+    text-align: center;
+    color: black;
+    font-size: 1.5em;
+  }
+  .edit-category form {
+    display: flex;
+    width: 100%;
+    margin: 30px auto;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .edit-category form input {
+    width: 300px;
+    margin: 10px auto;
+  }
+  .edit-category form .submit-btn {
+    margin: 30px auto;
+    padding: 10px;
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PANEL GESTION QUESTIONS ET RÉPONSES */
+  .manage-question-answer {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .manage-question-answer h1 {
+    margin-top: 80px;
+    font-size: 1.5em;
+  }
+  .manage-question-answer .actions-add {
+    width: 60%;
+    margin: 60px auto;
+  }
+  .manage-question-answer .actions-add .add-question-answer,
+.manage-question-answer .actions-add .edit-question-answer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE PANNEAU AJOUT QUESTION - RÉPONSES */
+  .add-question-answers {
+    margin: 20px auto;
+  }
+  .add-question-answers h1 {
+    font-size: 1em;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    line-height: 1.5em;
+    text-align: center;
+    color: black;
+    font-size: 1.5em;
+  }
+  .add-question-answers h2 {
+    font-size: 1.5em;
+    text-align: center;
+    font-family: "Karla", sans-serif;
+    margin-top: 50px;
+    color: #fb7d00;
+  }
+  .add-question-answers form {
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    width: 50%;
+  }
+  .add-question-answers form .answers-area {
+    margin: 0;
+  }
+  .add-question-answers form .answers-area .answers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .add-question-answers form .answers-area .answers .verify-answers {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    align-items: center;
+    padding: 20px;
+  }
+  .add-question-answers form input {
+    margin: 10px auto;
+  }
+  .add-question-answers form button {
+    margin: 30px auto;
+    padding: 15px;
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* LISTE DES CATÉGORIES POUR MODIFIER QUESTIONS ET RÉPONSES */
+  .editing-question-list {
+    width: 100%;
+  }
+  .editing-question-list .modal-container {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: visibility 0.4s;
+  }
+  .editing-question-list .modal-container.active {
+    visibility: visible;
+    transition: visibility 0s;
+  }
+  .editing-question-list .overlay {
+    opacity: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(51, 51, 51, 0.8274509804);
+    transition: opacity 0.4s 0.2s ease-out;
+  }
+  .editing-question-list .modal-container.active .overlay {
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+  }
+  .editing-question-list .modal {
+    width: 95%;
+    max-width: 500px;
+    min-width: 300px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 5px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 50px));
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+  .editing-question-list .modal .btns {
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+    padding: 5px;
+  }
+  .editing-question-list .modal-container.active .modal {
+    opacity: 1;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+  .editing-question-list .close-modal {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: #ff365e;
+    color: #fff;
+  }
+  .editing-question-list .warning-delete {
+    margin-bottom: 5px;
+    font-family: "Poppins";
+    font-weight: 500;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .editing-question-list .confirm-delete,
+.editing-question-list .no-delete {
+    width: 50px;
+    padding: 3px;
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+  }
+  .editing-question-list .content h1 {
+    margin-top: 60px;
+    font-size: 1.4em;
+  }
+  .editing-question-list .content .question-listing {
+    width: 60%;
+    margin: 0 auto;
+  }
+  .editing-question-list .content .question-listing ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  .editing-question-list .content .question-listing ul li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 30px;
+    padding: 10px;
+  }
+  .editing-question-list .content .question-listing ul li h2 {
+    font-size: 1em;
+    font-family: "Lato";
+    margin-top: 20px;
+    padding: 10px;
+  }
+  .editing-question-list .content .question-listing ul li img {
+    width: 90%;
+  }
+  .editing-question-list .content .question-listing ul li .actions-edit {
+    width: 100%;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* LISTE DES QUESTIONS POUR MODIFIER OU SUPPRIMER LA QUESTION + RÉPONSES */
+  .editing-question-list {
+    width: 100%;
+  }
+  .editing-question-list .warning-delete {
+    text-align: center;
+  }
+  .editing-question-list .content {
+    width: 100%;
+  }
+  .editing-question-list .content .question-listing ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .editing-question-list .content .question-listing ul li {
+    width: 40%;
+    margin: 0;
+  }
+  .editing-question-list .content .question-listing ul li img {
+    width: 250px;
+  }
+  .editing-question-list .content .question-listing ul li .actions-edit {
+    width: auto;
+    display: flex;
+  }
+  .editing-question-list .content .question-listing ul li .actions-edit a,
+.editing-question-list .content .question-listing ul li .actions-edit .btn-delete {
+    font-size: 0.9em;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* FORMULAIRE DE MODIFICATION DE QUESTION ET RÉPONSES */
+  .edit-question-answers h1 {
+    margin-top: 70px;
+    font-size: 1.3em;
+  }
+  .edit-question-answers .edit-block form {
+    width: 100%;
+  }
+  .edit-question-answers .edit-block form .question-area label {
+    font-size: 1.3em;
+  }
+  .edit-question-answers .edit-block form .question-area input {
+    width: 100%;
+  }
+  .edit-question-answers .edit-block form .answers-area h2 {
+    margin-top: 50px;
+  }
+  .edit-question-answers .edit-block form .answers-area .edit-answers label {
+    font-size: 1.3em;
+  }
+  .edit-question-answers .edit-block form .answers-area .edit-answers .answer {
+    width: 100%;
+  }
+  .edit-question-answers .edit-block form .answers-area button {
+    margin-top: 50px;
+    width: auto;
+  }
+  /* ********************************************************************* */
+  /* ************   PAGE DE GESTION DES USERS PAR L'ADMIN  *************** */
+  /* ********************************************************************* */
+  .users-section h1 {
+    margin-top: 50px;
+  }
+  .users-section blockquote {
+    text-align: center;
+  }
+  .users-section .users-list form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+  }
+  .users-section .users-list form table {
+    margin-top: 80px;
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Poppins";
+    font-size: 1em;
+  }
+  .users-section .users-list form table thead > tr > th {
+    padding-bottom: 10px;
+    padding-left: 30px;
+  }
+  .users-section .users-list form table tbody {
+    margin: 0 auto;
+  }
+  .users-section .users-list form table tbody tr > td {
+    padding-top: 20px;
+    padding-left: 20px;
+    text-align: center;
+    border-bottom: none;
+  }
+  .users-section .users-list form button {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    width: 10%;
+    margin: 60px auto;
+  }
+  /* ********************************************************************* */
+  /* *********************   BACK OFFICE    ****************************** */
+  /* ********************************************************************* */
+  /* PAGE HOME USER */
+  .user-profile {
+    width: 80%;
+    text-align: center;
+    margin: 30px auto;
+  }
+  .user-profile h1 {
+    font-size: 1em;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    line-height: 1.5em;
+    text-align: center;
+    color: black;
+    font-size: 1.5em;
+  }
+  .user-profile .content-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 100px auto;
+  }
+  .user-profile .content-area .alert-danger {
+    width: auto;
+    height: auto;
+  }
+  .user-profile .content-area form {
+    font-size: 1.5em;
+    text-align: center;
+    font-family: "Karla", sans-serif;
+    font-size: 1em;
+    width: 50%;
+  }
+  .user-profile .content-area form h2 {
+    margin-bottom: 50px;
+    font-size: 1.3em;
+    margin-top: 20px;
+  }
+  .user-profile .content-area form .login-area,
+.user-profile .content-area form .password,
+.user-profile .content-area form .repeat-password {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+  }
+  .user-profile .content-area form .btn-edit-profile {
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Exo";
+    text-align: center;
+    border: none;
+    margin-top: 30px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE INSCRIPTION */
+  .inscription-area {
+    width: 100%;
+    margin-top: 60px;
+  }
+  .inscription-area h1 {
+    font-size: 2em;
+  }
+  .inscription-area .cta-connexion {
+    padding: 10px;
+  }
+  .inscription-area form {
+    margin-top: 50px;
+  }
+  .inscription-area form .login-area,
+.inscription-area form .password,
+.inscription-area form .repeat-password {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    width: 500px;
+    font-family: "Poppins", sans-serif;
+    text-align: justify;
+    font-size: 1em;
+  }
+  .inscription-area form button {
+    padding: 10px;
+    letter-spacing: 3px;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* PAGE DE CONNEXION */
+  .connexion-area {
+    width: 80%;
+    margin: 50px auto;
+  }
+  .connexion-area h1 {
+    text-align: center;
+    font-size: 1em;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    line-height: 1.5em;
+    text-align: center;
+    color: black;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  .connexion-area form .connexion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin: 50px auto;
+  }
+  .connexion-area form .connexion-content .login-area,
+.connexion-area form .connexion-content .password {
+    font-family: "Poppins", sans-serif;
+    text-align: justify;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+  }
+  .connexion-area form .connexion-btn {
+    margin: 40px auto;
+    color: #ffffff;
+    background: #fb7d00;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Exo";
+    text-align: center;
+    border: none;
+    margin-top: 30px;
+    display: flex;
+  }
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+  /* ********************************************************************* */
+}
+
+/*# sourceMappingURL=style.css.map */
